@@ -1,0 +1,8 @@
+# Allows merge of users_allow_entries
+# PATH: /var/lib/jerakia/schema/vas.json
+{
+  "users_allow_entries": {
+    "cascade": true,
+    "merge": "array"
+  }
+}

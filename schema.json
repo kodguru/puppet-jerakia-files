@@ -1,0 +1,9 @@
+# To allow classes merge:
+# PATH: /var/lib/jerakia/schema.json
+
+{
+  "classes": {
+    "cascade": true,
+    "merge": "array"
+  }
+}

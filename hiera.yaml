@@ -1,0 +1,27 @@
+# PATH: /etc/puppetlabs/code/hiera.yaml
+version: 5
+
+defaults:
+  data_hash: yaml_data
+  datadir: "/var/lib/jerakia/data"
+  #datadir: hieradata
+
+hierarchy:
+  - name: "Jerakia Server"
+    lookup_key: jerakia
+    options:
+      # Generate token
+      token: puppet:6164e90882726b0d2e9688d2fc91864926e4d552294bbe1a4b3d532fb549578dcfd9725bd65cb81e
+      
+      scope:
+        # No PATHs, just scope
+        #certname: fqdn/%{trusted.certname}
+        fqdn: "%{trusted.certname}"
+        #groups: "groups/%{facts.groups}"
+        groups: "%{facts.groups}"
+        environment: environment/%{environment}
+        profile: "%{facts.profile}"
+        access: "%{facts.access}"
+        vas_domain: "%{facts.vas_domain}"
+        domain: "%{facts.domain}"
+        osfamily: "%{facts.osfamily}"

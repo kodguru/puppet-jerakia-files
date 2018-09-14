@@ -1,0 +1,16 @@
+
+# Main configuration file
+# PATH: /etc/jerakia/jerakia.yaml 
+---
+policydir: /etc/jerakia/policy.d
+plugindir: /etc/jerakia/lib
+# Use debug loglevel in case of troubleshooting
+loglevel: info
+logfile: /var/log/jerakia/jerakia.log
+
+# Following configs are optional. Can be used as fall back when using an externally configured Jerakia server, and if the values are missing from hiera.yaml
+# To configure Jerakia server, change client to <server>. For locally configuredserver, leave this section completely out and 127.0.0.1 will be used.
+client: 
+  port: 9843
+  host: <Jerakia_server_IP_Addr>
+  token: 'puppet:07e1e2f7967a5398de42a89a89c5ee3670196b77cdcc9831365ce1caa2b7451e08f27f8ae6a8b1c3'
