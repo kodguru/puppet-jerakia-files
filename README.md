@@ -25,6 +25,15 @@ puppetserver gem install jerakia-client
 
 Explanation:
 (https://github.com/crayfishx/puppet-jerakia/issues/6 )
+ 
+If the above 2 installations do not fix, the other workaround is to add a ruby agent PATH in puppetserver.conf (below). This may require service restart.
+
+# head /etc/puppetlabs/puppetserver/conf.d/puppetserver.conf 
+# configuration for the JRuby interpreters
+jruby-puppet: {
+    # Where the puppet-agent dependency places puppet, facter, etc...
+    # Puppet server expects to load Puppet from this location
+    ruby-load-path: [/opt/puppetlabs/puppet/lib/ruby/vendor_ruby, /opt/puppetlabs/puppet/cache/lib]
 
 
 
@@ -95,7 +104,7 @@ logfile
 
 
 
-Configure schemas to allow merging behavior. Works even if this property not included in the Puppet module
+Configure schemas to allow merging behavior. Works even if this property is not included in the Puppet module
 such as:
 COPY schema.json /var/lib/jerakia/  (allows merging of classes)
 copy vas.json /var/lib/jerakia/schema/   ( allows merging of users_allow_entries)

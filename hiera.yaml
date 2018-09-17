@@ -1,3 +1,5 @@
+# Sample hiera file using jerakia backend
+# In production the Standard hierarchy scopes can be taken out of jerakia scope and directly into hiera
 # PATH: /etc/puppetlabs/code/hiera.yaml
 version: 5
 
@@ -25,3 +27,6 @@ hierarchy:
         vas_domain: "%{facts.vas_domain}"
         domain: "%{facts.domain}"
         osfamily: "%{facts.osfamily}"
+
+  - name: "OS defaults"
+    path: "osfamily/%{osfamily}-%{lsbmajdistrelease}.yaml"

@@ -1,20 +1,16 @@
 class Jerakia::Lookup::Plugin
   module Access_groups_backend
  
-    # Team group not tested
+    # Team groups not well tested
     def team_group_hierarchy
 
-      team_groups = scope[:team_groups].to_s.split(/,/)
+      team_groups = scope[:team_groups].to_s.split(/,/) || []
       team = scope[:team] || []
       team_groups_out = []
-      until team.empty?
         until team_groups.empty?
-          team = team.shift
           team_group = team_groups.shift
           team_groups_out << "team/#{team}/groups/#{team_group}"
         end
-      end
-
       team_groups_out
     end  # end of def1
 
