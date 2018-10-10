@@ -4,7 +4,9 @@
 # Provides easy examples of plugins that can be expanded to take care of our backend services. 
 # May be this could also provide motivation and hinst if we are to write a custom backend lookup for hiera, which would be the best alternative if it works.
 
-1. Ensure development tools packages are installed on OS. 
+1. Installation
+
+Ensure development tools packages are installed on OS. 
 
 For Redhat, ("development tools). Might already be installed by default. 
 Check next step and see if it fails
@@ -15,14 +17,15 @@ install -y libsqlite3-dev make gcc g++ &&
 
 
 
-Installation
+1.1 gem installation.
 
-gem install jerakia jerakia-client
+gem install jerakia jerakia-client jerakia-puppet
 
 and needs 2nd installation
 
 puppetserver gem install jerakia-client
 
+It's necessary to install jerakia-client twice with gem and puppetserver gem to avoid jerakia/client errors during lookup.
 Explanation:
 (https://github.com/crayfishx/puppet-jerakia/issues/6 )
  
@@ -40,7 +43,10 @@ jruby-puppet: {
 And then reload puppetserver
 /opt/puppetlabs/server/bin/puppetserver reload
 
+1.2 AIO packages
+
 (Could also be installed from AIO package)
+Ref: https://packager.io/gh/crayfishx/jerakia
 such as for RHEL/CentOS 7,
 
 # rpm --import https://rpm.packager.io/key
@@ -58,6 +64,20 @@ gpgkey=https://dl.packager.io/srv/crayfishx/jerakia/key
 
 
 yum install jerakia
+
+Run configuration as below and restart the service
+
+systemctl enable jerakia
+systemctl start jerakia
+
+AIO package installation on Ubuntu
+
+wget -qO- https://dl.packager.io/srv/crayfishx/jerakia/key | apt-key add -
+sudo wget -O /etc/apt/sources.list.d/jerakia.list \
+  https://dl.packager.io/srv/crayfishx/jerakia/stable/installer/ubuntu/16.04.repo
+sudo apt-get update
+sudo apt-get install jerakia
+Note: You might need to apt-get install wget apt-transport-https for the above instructions to work.
 
 
 Ref: http://jerakia.io/basics/install/
@@ -162,7 +182,7 @@ hierarchy:
 
 
 
-6. Restart puppetserver 
+4. Restart puppetserver 
 # Start jerakia server  (if installed from package)
 # pkill jerakia ; jerakia server &  (if installed from ruby gems)
 
@@ -239,4 +259,4 @@ hierarchy:
 
 TBD:
 Automate, 
-and if we use custom Docker images (& decide for Jerakia), we can include these steps in the image already so when deployed it's ready for use
+and if we use custom Docker images (& decide for Jerakia), we can include these steps in the image already so when deployed the container will be ready for use
